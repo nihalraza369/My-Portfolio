@@ -52,22 +52,22 @@ const About = () => {
           <h3 className="text-2xl font-bold">Creative Developer with a Passion for Design</h3>
           
           <p className="text-foreground/80">
-            I'm a creative developer with over 5 years of experience crafting engaging digital experiences. My approach combines technical expertise with an eye for design, resulting in projects that are both functional and visually compelling.
+            I'm a creative developer with over 4 years of experience crafting engaging digital experiences. My approach combines technical expertise with an eye for design, resulting in projects that are both functional and visually compelling.
           </p>
           
           <p className="text-foreground/80">
-            I specialize in front-end development, UI/UX design, and creating responsive web applications that deliver exceptional user experiences across all devices.
+            I specialize in front-end development, Ai Agents, and creating responsive web applications that deliver exceptional user experiences across all devices.
           </p>
           
           <div className="grid grid-cols-2 gap-4 pt-4">
             <div className="flex items-center space-x-2">
               <Calendar size={18} className="text-blue-500" />
-              <span>Born: June 12, 1990</span>
+              <span>Born: November 6, 2008</span>
             </div>
             
             <div className="flex items-center space-x-2">
               <MapPin size={18} className="text-blue-500" />
-              <span>San Francisco, CA</span>
+              <span>Pakistan, Karachi</span>
             </div>
             
             <div className="flex items-center space-x-2">
@@ -77,7 +77,7 @@ const About = () => {
             
             <div className="flex items-center space-x-2">
               <GraduationCap size={18} className="text-blue-500" />
-              <span>B.S. Computer Science</span>
+              <span>Intermediate Computer Science</span>
             </div>
           </div>
         </motion.div>
