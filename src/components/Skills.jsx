@@ -13,9 +13,9 @@ const Skills = () => {
     },
     {
       id: 'design',
-      title: 'UI/UX Design',
+      title: 'AI Development',
       icon: <Palette size={24} />,
-      skills: ['Figma', 'Adobe XD', 'Sketch', 'Photoshop', 'Illustrator', 'Wireframing', 'Prototyping', 'User Research', 'Accessibility']
+      skills: ['Langchain', 'Langgraph', 'Crew Ai', 'Ai Agent',]
     },
     {
       id: 'backend',
@@ -39,7 +39,7 @@ const Skills = () => {
       id: 'other',
       title: 'Other Skills',
       icon: <Layout size={24} />,
-      skills: ['Git', 'GitHub', 'CI/CD', 'Docker', 'AWS', 'Vercel', 'Netlify', 'Testing', 'Performance Optimization', 'SEO']
+      skills: ['Git', 'GitHub', 'CI/CD', 'Docker', 'AWS', 'Vercel', 'Netlify', 'Testing', 'Performance Optimization', 'Networking']
     }
   ];
 
@@ -117,22 +117,22 @@ const Skills = () => {
           <div className="space-y-12">
             {[
               {
-                period: '2022 - Present',
+                period: '2021 - 2024',
                 role: 'Senior Frontend Developer',
-                company: 'Tech Innovations Inc.',
-                description: 'Leading the frontend development team, implementing modern UI/UX designs, and optimizing application performance.'
+                company: 'SMIT',
+                description: 'Developed and maintained responsive web applications using React and Next.js, ensuring high performance and user experience.'
               },
               {
-                period: '2019 - 2022',
-                role: 'UI/UX Developer',
-                company: 'Creative Solutions',
-                description: 'Designed and developed user interfaces for web and mobile applications, focusing on user experience and accessibility.'
+                period: '2023 - present',
+                role: 'AI Developer',
+                company: 'PIAIC',
+                description: 'Developing AI-driven applications and solutions, focusing on natural language processing and machine learning.'
               },
               {
-                period: '2017 - 2019',
-                role: 'Web Developer',
-                company: 'Digital Agency',
-                description: 'Created responsive websites and web applications for clients across various industries using modern web technologies.'
+                period: '2023 - present',
+                role: 'Backend Developer',
+                company: 'PIAIC',
+                description: 'Implemented RESTful APIs and managed database systems using Node.js and MongoDB, ensuring data integrity and security.'
               }
             ].map((item, index) => (
               <motion.div
