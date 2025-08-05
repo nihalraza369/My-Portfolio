@@ -308,17 +308,7 @@ const Hero = () => {
       </div>
       
       {/* Scroll down indicator */}
-      <motion.div 
-        className="scroll-down"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.5 }}
-      >
-        <span className="text-sm text-foreground/50 mb-2">Scroll Down</span>
-        <div className="scroll-down-arrow">
-          <ArrowDown size={16} className="text-foreground/50" />
-        </div>
-      </motion.div>
+      
     </div>
   );
 };
