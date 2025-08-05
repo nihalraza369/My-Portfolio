@@ -150,6 +150,7 @@
 
 .animation-slide {
   animation: text-animation 8s infinite;
+  
 }
 
 @keyframes text-animation {
