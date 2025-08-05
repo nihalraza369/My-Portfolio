@@ -48,7 +48,7 @@ const Footer = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row justify-between items-center"
         >
-          <p className="text-foreground/70 text-sm mb-4 md:mb-0">© {currentYear} John Doe. All rights reserved.</p>
+          <p className="text-foreground/70 text-sm mb-4 md:mb-0">© {currentYear} nihal nughman. All rights reserved.</p>
           
           <div className="flex space-x-6">
             <a href="#home" className="text-foreground/70 hover:text-foreground transition-colors text-sm">Home</a>
