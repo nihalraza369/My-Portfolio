@@ -1,22 +1,9 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { ArrowDown, Facebook, Github, Instagram, Linkedin, Twitter, Code, Zap, Cpu, Palette, Database, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Hero = () => {
-  // Floating icons animation variants
-  const floatingVariants = {
-    animate: {
-      y: [-8, 8, -8],
-      rotate: [0, 3, -3, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
-
   const pulseVariants = {
     animate: {
       scale: [1, 1.05, 1],
@@ -28,15 +15,35 @@ const Hero = () => {
     }
   };
 
-  const orbitVariants = {
-    animate: {
-      rotate: 360,
-      transition: {
-        duration: 20,
-        repeat: Infinity,
-        ease: "linear"
-      }
-    }
+
+  // Interactive Grid + spotlight
+  const InteractiveGrid = () => {
+    const mouseX = useMotionValue(Infinity);
+    const mouseY = useMotionValue(Infinity);
+
+    const mask = useTransform([mouseX, mouseY], ([x, y]) =>
+      `radial-gradient(400px at ${x}px ${y}px, black, transparent)`
+    );
+
+    return (
+      <div
+        className="absolute inset-0 z-0"
+        onMouseMove={(e) => {
+          mouseX.set(e.pageX);
+          mouseY.set(e.pageY);
+        }}
+        onMouseLeave={() => {
+          mouseX.set(Infinity);
+          mouseY.set(Infinity);
+        }}
+      >
+        <motion.div
+          className="absolute inset-0 bg-[linear-gradient(to_right,#d5d5d555_1px,transparent_1px),linear-gradient(to_bottom,#d5d5d555_1px,transparent_1px)] bg-[size:30px_30px]"
+          style={{ maskImage: mask, WebkitMaskImage: mask }}
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_500px_at_50%_200px,#e8e8e8,transparent)] opacity-50" />
+      </div>
+    );
   };
 
   return (
@@ -47,6 +54,9 @@ const Hero = () => {
         <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-green-500/20 rounded-full blur-3xl"></div>
       </div>
 
+      {/* Interactive grid with spotlight */}
+      <InteractiveGrid />
+
       <div className="container-custom grid lg:grid-cols-2 gap-8 lg:gap-12 items-center pt-20 px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -54,14 +64,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="flex flex-col space-y-6 order-2 lg:order-1"
         >
-           <motion.span 
-            className="text-lg font-medium text-foreground/70"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-          >
-            Assalamulaikum
-          </motion.span>
+          
 <motion.h1 
   className="text-2xl sm:text-3xl font-bold flex flex-col sm:flex-row sm:items-center gap-2"
   initial={{ opacity: 0 }}
@@ -71,8 +74,8 @@ const Hero = () => {
   <span>Hello 👋 I'm</span>
   <span className="animation-container">
     <div className="animation-slide">
-      <div className="first"><div>Nihal Raza</div></div>
-      <div className="second"><div>Full Stack Developer</div></div>
+      <div className="first"><div>Jenna Czech</div></div>
+      <div className="second"><div>Proofreader</div></div>
       <div className="third"><div>AI Engineer</div></div>
     </div>
   </span>
@@ -84,7 +87,7 @@ const Hero = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
           >
-            Creative Developer & AI Enthusiast
+            Professional Proofreader & Creative Wordsmith
           </motion.h2>
           
           <motion.p 
@@ -93,7 +96,7 @@ const Hero = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.5 }}
           >
-            Passionate about crafting engaging digital experiences through innovative design and cutting-edge technology. Let's build something amazing together!
+           ✨ Helping authors, businesses, and creators elevate their writing with flawless clarity and professional polish.
           </motion.p>
           
           <motion.div 
@@ -163,7 +166,7 @@ const Hero = () => {
                   
                   {/* Image */}
                   <motion.img
-                    src="/my-image.png"
+                    src="/Jenna.871451ac785f0e7c9d39.jpeg"
                     alt="Profile"
                     className="w-full h-full object-cover relative z-10 transition-transform duration-300 group-hover:scale-105"
                     whileHover={{ scale: 1.02 }}
@@ -175,96 +178,7 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* Orbiting Tech Icons Container */}
-            <motion.div
-              variants={orbitVariants}
-              animate="animate"
-              className="absolute inset-0 w-full h-full"
-            >
-              {/* Icon positions in a circular orbit */}
-              <motion.div
-                className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-8"
-                style={{ transformOrigin: '50% 200px' }}
-              >
-                <motion.div
-                  variants={floatingVariants}
-                  animate="animate"
-                  className="bg-gradient-to-br from-green-500 to-green-700 backdrop-blur-sm text-white p-2.5 sm:p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-                >
-                  <Code size={16} className="sm:w-5 sm:h-5" />
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                className="absolute top-1/4 right-0 transform translate-x-4"
-                style={{ transformOrigin: '-150px 150px' }}
-              >
-                <motion.div
-                  variants={floatingVariants}
-                  animate="animate"
-                  style={{ animationDelay: '1s' }}
-                  className="bg-gradient-to-br from-blue-500 to-blue-700 backdrop-blur-sm text-white p-2.5 sm:p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-                >
-                  <Zap size={16} className="sm:w-5 sm:h-5" />
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                className="absolute bottom-1/4 right-0 transform translate-x-4"
-                style={{ transformOrigin: '-150px -150px' }}
-              >
-                <motion.div
-                  variants={floatingVariants}
-                  animate="animate"
-                  style={{ animationDelay: '2s' }}
-                  className="bg-gradient-to-br from-purple-500 to-purple-700 backdrop-blur-sm text-white p-2.5 sm:p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-                >
-                  <Cpu size={16} className="sm:w-5 sm:h-5" />
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-8"
-                style={{ transformOrigin: '50% -200px' }}
-              >
-                <motion.div
-                  variants={floatingVariants}
-                  animate="animate"
-                  style={{ animationDelay: '3s' }}
-                  className="bg-gradient-to-br from-orange-500 to-orange-700 backdrop-blur-sm text-white p-2.5 sm:p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-                >
-                  <Palette size={16} className="sm:w-5 sm:h-5" />
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                className="absolute bottom-1/4 left-0 transform -translate-x-4"
-                style={{ transformOrigin: '150px -150px' }}
-              >
-                <motion.div
-                  variants={floatingVariants}
-                  animate="animate"
-                  style={{ animationDelay: '4s' }}
-                  className="bg-gradient-to-br from-red-500 to-red-700 backdrop-blur-sm text-white p-2.5 sm:p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-                >
-                  <Database size={16} className="sm:w-5 sm:h-5" />
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                className="absolute top-1/4 left-0 transform -translate-x-4"
-                style={{ transformOrigin: '150px 150px' }}
-              >
-                <motion.div
-                  variants={floatingVariants}
-                  animate="animate"
-                  style={{ animationDelay: '5s' }}
-                  className="bg-gradient-to-br from-teal-500 to-teal-700 backdrop-blur-sm text-white p-2.5 sm:p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-                >
-                  <Globe size={16} className="sm:w-5 sm:h-5" />
-                </motion.div>
-              </motion.div>
-            </motion.div>
+            {/* Orbiting tech icons removed as requested */}
 
             {/* Enhanced Code Badge */}
             <motion.div 
