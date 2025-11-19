@@ -142,27 +142,28 @@ const Hero = () => {
           </motion.div>
          
           <motion.div
-            className="flex items-center justify-center sm:justify-start space-x-4 pt-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7, duration: 0.5 }}
-          >
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-foreground/70 hover:text-foreground transition-colors">
-              <Github size={24} />
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-700 transition-colors">
-              <Linkedin size={24} />
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-sky-500 transition-colors">
-              <Twitter size={24} />
-            </a>
-             <a href="https://www.instagram.com/dev_nihal_raza/" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-pink-600 transition-colors">
-              <Instagram size={24} />
-            </a>
-             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-600 transition-colors">
-              <Facebook size={24} />
-            </a>
-          </motion.div>
+  className="flex items-center justify-center sm:justify-start space-x-4 pt-4"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 0.7, duration: 0.5 }}
+>
+  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">
+    <Github size={24} />
+  </a>
+  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-blue-500 transition-colors">
+    <Linkedin size={24} />
+  </a>
+  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-sky-400 transition-colors">
+    <Twitter size={24} />
+  </a>
+  <a href="https://www.instagram.com/dev_nihal_raza/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-pink-500 transition-colors">
+    <Instagram size={24} />
+  </a>
+  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-blue-500 transition-colors">
+    <Facebook size={24} />
+  </a>
+</motion.div>
+
         </motion.div>
        
         <motion.div
