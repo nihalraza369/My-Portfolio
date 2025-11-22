@@ -1,346 +1,238 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowDown, Facebook, Github, Instagram, Linkedin, Twitter, Code, Zap, Cpu, Palette, Database, Globe } from 'lucide-react';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
+import { Code, Zap, Cpu, Palette, Database, Globe, Github, Linkedin, Twitter, Instagram, Facebook, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useMotionValue, useTransform } from 'framer-motion';
-
 
 const Hero = () => {
-  // Floating icons animation variants
+  // MOUSE MOVE LOGIC
+  const mouseX = useMotionValue(Infinity);
+  const mouseY = useMotionValue(Infinity);
+
+  const mask = useTransform([mouseX, mouseY], ([x, y]) =>
+    `radial-gradient(400px at ${x}px ${y}px, black, transparent)`
+  );
+
+  // ANIMATION VARIANTS
   const floatingVariants = {
     animate: {
-      y: [-8, 8, -8],
-      rotate: [0, 3, -3, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
-
-  const pulseVariants = {
-    animate: {
-      scale: [1, 1.05, 1],
-      transition: {
-        duration: 3,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
+      y: [-5, 5, -5],
+      rotateX: [0],
+      transition: { duration: 4, repeat: Infinity, ease: "easeInOut" }
     }
   };
 
   const orbitVariants = {
     animate: {
       rotate: 360,
-      transition: {
-        duration: 20,
-        repeat: Infinity,
-        ease: "linear"
-      }
+      transition: { duration: 20, repeat: Infinity, ease: "linear" }
     }
   };
-  const InteractiveGrid = () => {
-    const mouseX = useMotionValue(Infinity);
-    const mouseY = useMotionValue(Infinity);
 
-    const mask = useTransform([mouseX, mouseY], ([x, y]) =>
-      `radial-gradient(400px at ${x}px ${y}px, black, transparent)`
-    );
+  return (
+    <div 
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
+      onMouseMove={(e) => {
+        mouseX.set(e.clientX);
+        mouseY.set(e.clientY);
+      }}
+      onMouseLeave={() => {
+        mouseX.set(Infinity);
+        mouseY.set(Infinity);
+      }}
+    >
+      {/* === BACKGROUND === */}
+      <div className="absolute inset-0 -z-20 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-green-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-green-500/20 rounded-full blur-3xl"></div>
+      </div>
 
-    return (
-      <div
-        className="absolute inset-0 z-0"
-        onMouseMove={(e) => {
-          mouseX.set(e.pageX);
-          mouseY.set(e.pageY);
-        }}
-        onMouseLeave={() => {
-          mouseX.set(Infinity);
-          mouseY.set(Infinity);
-        }}
-      >
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <motion.div
           className="absolute inset-0 bg-[linear-gradient(to_right,#d5d5d555_1px,transparent_1px),linear-gradient(to_bottom,#d5d5d555_1px,transparent_1px)] bg-[size:30px_30px]"
           style={{ maskImage: mask, WebkitMaskImage: mask }}
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_500px_at_50%_200px,#e8e8e8,transparent)] opacity-50" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#33333311_1px,transparent_1px),linear-gradient(to_bottom,#33333311_1px,transparent_1px)] bg-[size:30px_30px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_center,#111111,transparent)] opacity-80" />
       </div>
-    );
-  };
 
-  return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-      {/* Background Elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-green-500/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-green-500/20 rounded-full blur-3xl"></div>
-      </div>
-      <InteractiveGrid />
-
-      <div className="container-custom grid lg:grid-cols-2 gap-8 lg:gap-12 items-center pt-20 px-4">
+      {/* === MAIN CONTENT === */}
+      <div className="container mx-auto grid lg:grid-cols-2 gap-10 lg:gap-8 items-center pt-20 px-6 relative z-10">
+        
+        {/* LEFT SIDE: TEXT CONTENT */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col space-y-6 order-2 lg:order-1"
+          className="flex flex-col space-y-6 order-2 lg:order-1 lg:pl-12 text-center lg:text-left"
         >
-           <motion.span
-            className="text-lg font-medium text-white"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-          >
+           <motion.span 
+             className="text-lg font-medium text-green-400 tracking-wide uppercase"
+             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
+           >
             Assalamulaikum
           </motion.span>
-<motion.h1
-  className="text-2xl sm:text-3xl font-bold text-white flex flex-col sm:flex-row sm:items-center gap-2"
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ delay: 0.3, duration: 0.5 }}
->
-  <span>Hello 👋 I'm</span>
-  <span className="animation-container text-white">
-    <div className="animation-slide">
-      <div className="first"><div>Nihal Raza</div></div>
-      <div className="second"><div>Full Stack Developer</div></div>
-      <div className="third"><div>AI Engineer</div></div>
-    </div>
-  </span>
-</motion.h1>
+          
+          {/* 
+             TEXT SIZE FIX:
+             - text-3xl (Mobile) -> text-5xl (Desktop)
+             - height (h-[...]) fix kiya taake text kate nahi
+          */}
+         <motion.h1 className="text-2xl sm:text-3xl font-bold text-white flex flex-col sm:flex-row sm:items-center gap-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
+            <span>Hello 👋 I'm</span>
+            <span className="animation-container text-white">
+              <div className="animation-slide">
+                <div className="first"><div>Nihal Raza</div></div>
+                <div className="second"><div>Full Stack Developer</div></div>
+                <div className="third"><div>AI Engineer</div></div>
+              </div>
+            </span>
+          </motion.h1>
 
-          <motion.h2
-            className="text-xl sm:text-2xl lg:text-3xl font-medium text-white"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
+          <motion.h2 
+            className="text-xl sm:text-2xl font-medium text-gray-300"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
           >
             Creative Developer & AI Enthusiast
           </motion.h2>
          
-          <motion.p
-            className="text-base sm:text-lg text-white max-w-lg"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
+          <motion.p 
+            className="text-sm sm:text-base text-gray-400 max-w-lg mx-auto lg:mx-0 leading-relaxed"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
           >
             Passionate about crafting engaging digital experiences through innovative design and cutting-edge technology. Let's build something amazing together!
           </motion.p>
          
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
+          {/* === NEW PREMIUM BUTTONS === */}
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
           >
-            <Button className="bg-green-900 hover:bg-green-800" size="lg" asChild>
-              <a href="#contact">Get in Touch</a>
+            {/* Primary Button: Gradient & Shine */}
+            <Button 
+              className="group relative overflow-hidden bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-6 rounded-xl shadow-lg shadow-green-900/20 hover:shadow-green-500/30 transition-all duration-300 border border-green-500/20"
+              size="lg" asChild
+            >
+              <a href="#contact" className="flex items-center gap-2 text-base font-semibold">
+                <span className="relative z-10">Get in Touch</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
+                {/* Shine Effect Overlay */}
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
+              </a>
             </Button>
-            <Button variant="outline" size="lg" asChild>
-              <a href="#projects">View Projects</a>
+            
+            {/* Secondary Button: Glassmorphism */}
+            <Button 
+              variant="outline" 
+              className="bg-white/5 backdrop-blur-sm border-white/10 text-white px-8 py-6 rounded-xl hover:bg-white/10 hover:border-green-500/50 hover:text-green-400 transition-all duration-300" 
+              size="lg" asChild
+            >
+              <a href="#projects" className="text-base font-medium">View Projects</a>
             </Button>
           </motion.div>
          
-          <motion.div
-  className="flex items-center justify-center sm:justify-start space-x-4 pt-4"
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ delay: 0.7, duration: 0.5 }}
->
-  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">
-    <Github size={24} />
-  </a>
-  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-blue-500 transition-colors">
-    <Linkedin size={24} />
-  </a>
-  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-sky-400 transition-colors">
-    <Twitter size={24} />
-  </a>
-  <a href="https://www.instagram.com/dev_nihal_raza/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-pink-500 transition-colors">
-    <Instagram size={24} />
-  </a>
-  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-blue-500 transition-colors">
-    <Facebook size={24} />
-  </a>
-</motion.div>
-
+          {/* Social Icons */}
+            {/* Social Icons with Hover Glow */}
+          <motion.div 
+            className="flex items-center justify-center lg:justify-start space-x-6 pt-6"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}
+          >
+            {[
+              { Icon: Github, color: "hover:text-white" },
+              { Icon: Linkedin, color: "hover:text-blue-500" },
+              { Icon: Twitter, color: "hover:text-sky-400" },
+              { Icon: Instagram, color: "hover:text-pink-500" },
+              { Icon: Facebook, color: "hover:text-blue-600" }
+            ].map(({ Icon, color }, index) => (
+              <a 
+                key={index} 
+                href="#" 
+                className={`text-white/60 transition-all duration-300 transform hover:scale-125 hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] ${color}`}
+              >
+                <Icon size={28} />
+              </a>
+            ))}
+          </motion.div>
         </motion.div>
        
+        {/* RIGHT SIDE: 3D IMAGE (Previous Perfect Version) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="relative flex justify-center order-1 lg:order-2"
+          className="relative flex justify-center order-1 lg:order-2 py-12 lg:py-0 [perspective:1200px]"
         >
-          <div className="relative">
-            {/* Animated Background Rings */}
-            <motion.div
-              variants={pulseVariants}
-              animate="animate"
-              className="absolute inset-0 rounded-[2rem] sm:rounded-[3rem] lg:rounded-[4rem] border-4 border-green-500/30 scale-110 -z-10"
-            />
-            <motion.div
-              variants={pulseVariants}
-              animate="animate"
-              style={{ animationDelay: '1s' }}
-              className="absolute inset-0 rounded-[2rem] sm:rounded-[3rem] lg:rounded-[4rem] border-2 border-green-400/20 scale-125 -z-10"
-            />
-           
-            {/* Main Image Container */}
-            <div className="flex justify-center relative">
-              <div className="flex justify-center relative">
-                <div className="rounded-[2rem] sm:rounded-[3rem] lg:rounded-[4rem] overflow-hidden shadow-2xl w-[250px] h-[320px] sm:w-[300px] sm:h-[400px] lg:w-[400px] lg:h-[600px] relative group">
-                  {/* Glowing border effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-green-500/50 via-blue-500/50 to-purple-500/50 rounded-[2rem] sm:rounded-[3rem] lg:rounded-[4rem] blur-sm group-hover:blur-md transition-all duration-300 -z-10"></div>
-                 
-                  {/* Image */}
-                  <motion.img
-                    src="/my-image.png"
-                    alt="Profile"
-                    className="w-full h-full object-cover relative z-10 transition-transform duration-300 group-hover:scale-105"
-                    whileHover={{ scale: 1.02 }}
-                  />
-                 
-                  {/* Overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-white-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-              </div>
+          <div className="relative w-[280px] h-[350px] sm:w-[320px] sm:h-[470px] [transform-style:preserve-3d]">
+            
+            {/* Layer 1: Back Border */}
+            <div 
+              className="absolute inset-0 rounded-[2.5rem] bg-black border-[3px] border-green-400 shadow-[0_0_40px_rgba(74,222,128,0.2)]"
+              style={{ transform: "translateZ(-40px)" }}
+            >
+                <div className="absolute inset-0 bg-green-500/5 rounded-[2.5rem]" />
             </div>
 
-            {/* Orbiting Tech Icons Container */}
-            <motion.div
-              variants={orbitVariants}
-              animate="animate"
-              className="absolute inset-0 w-full h-full"
+            {/* Layer 2: Orbiting Icons */}
+            <div className="absolute inset-0 [transform-style:preserve-3d] rotate-x-12 z-10">
+                <motion.div
+                  variants={orbitVariants}
+                  animate="animate"
+                  className="absolute inset-0 w-full h-full [transform-style:preserve-3d]"
+                >
+                  <motion.div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-8" style={{ transformOrigin: '50% 235px' }}>
+                      <motion.div variants={floatingVariants} animate="animate" className="bg-gradient-to-br from-green-500 to-green-700 text-white p-2.5 rounded-xl shadow-lg border border-white/20">
+                        <Code size={20} />
+                      </motion.div>
+                  </motion.div>
+
+                  <motion.div className="absolute top-[20%] right-0 translate-x-8" style={{ transformOrigin: '-140px 170px' }}>
+                      <motion.div variants={floatingVariants} animate="animate" style={{ animationDelay: '1s' }} className="bg-gradient-to-br from-blue-500 to-blue-700 text-white p-2.5 rounded-xl shadow-lg border border-white/20">
+                        <Zap size={20} />
+                      </motion.div>
+                  </motion.div>
+
+                  <motion.div className="absolute bottom-[20%] right-0 translate-x-8" style={{ transformOrigin: '-140px -170px' }}>
+                      <motion.div variants={floatingVariants} animate="animate" style={{ animationDelay: '2s' }} className="bg-gradient-to-br from-purple-500 to-purple-700 text-white p-2.5 rounded-xl shadow-lg border border-white/20">
+                        <Cpu size={20} />
+                      </motion.div>
+                  </motion.div>
+
+                  <motion.div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-8" style={{ transformOrigin: '50% -235px' }}>
+                      <motion.div variants={floatingVariants} animate="animate" style={{ animationDelay: '3s' }} className="bg-gradient-to-br from-orange-500 to-orange-700 text-white p-2.5 rounded-xl shadow-lg border border-white/20">
+                        <Palette size={20} />
+                      </motion.div>
+                  </motion.div>
+
+                  <motion.div className="absolute bottom-[20%] left-0 -translate-x-8" style={{ transformOrigin: '140px -170px' }}>
+                      <motion.div variants={floatingVariants} animate="animate" style={{ animationDelay: '4s' }} className="bg-gradient-to-br from-red-500 to-red-700 text-white p-2.5 rounded-xl shadow-lg border border-white/20">
+                        <Database size={20} />
+                      </motion.div>
+                  </motion.div>
+
+                  <motion.div className="absolute top-[20%] left-0 -translate-x-8" style={{ transformOrigin: '140px 170px' }}>
+                      <motion.div variants={floatingVariants} animate="animate" style={{ animationDelay: '5s' }} className="bg-gradient-to-br from-teal-500 to-teal-700 text-white p-2.5 rounded-xl shadow-lg border border-white/20">
+                        <Globe size={20} />
+                      </motion.div>
+                  </motion.div>
+                </motion.div>
+            </div>
+
+            {/* Layer 3: Image (Front) */}
+            <div 
+               className="absolute inset-0 rounded-[2.5rem] overflow-hidden"
+               style={{ transform: "translateZ(30px)" }}
             >
-              {/* Icon positions in a circular orbit */}
-              <motion.div
-                className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-8"
-                style={{ transformOrigin: '50% 200px' }}
-              >
-                <motion.div
-                  variants={floatingVariants}
-                  animate="animate"
-                  className="bg-gradient-to-br from-green-500 to-green-700 backdrop-blur-sm text-white p-2.5 sm:p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-                >
-                  <Code size={16} className="sm:w-5 sm:h-5" />
-                </motion.div>
-              </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-tr from-green-500/10 via-transparent to-green-500/10 z-10 pointer-events-none mix-blend-overlay" />
+                <img
+                  src="/my-image.png"
+                  alt="Profile"
+                  className="w-full h-full object-cover object-top"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 z-20"></div>
+            </div>
 
-              <motion.div
-                className="absolute top-1/4 right-0 transform translate-x-4"
-                style={{ transformOrigin: '-150px 150px' }}
-              >
-                <motion.div
-                  variants={floatingVariants}
-                  animate="animate"
-                  style={{ animationDelay: '1s' }}
-                  className="bg-gradient-to-br from-blue-500 to-blue-700 backdrop-blur-sm text-white p-2.5 sm:p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-                >
-                  <Zap size={16} className="sm:w-5 sm:h-5" />
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                className="absolute bottom-1/4 right-0 transform translate-x-4"
-                style={{ transformOrigin: '-150px -150px' }}
-              >
-                <motion.div
-                  variants={floatingVariants}
-                  animate="animate"
-                  style={{ animationDelay: '2s' }}
-                  className="bg-gradient-to-br from-purple-500 to-purple-700 backdrop-blur-sm text-white p-2.5 sm:p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-                >
-                  <Cpu size={16} className="sm:w-5 sm:h-5" />
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-8"
-                style={{ transformOrigin: '50% -200px' }}
-              >
-                <motion.div
-                  variants={floatingVariants}
-                  animate="animate"
-                  style={{ animationDelay: '3s' }}
-                  className="bg-gradient-to-br from-orange-500 to-orange-700 backdrop-blur-sm text-white p-2.5 sm:p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-                >
-                  <Palette size={16} className="sm:w-5 sm:h-5" />
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                className="absolute bottom-1/4 left-0 transform -translate-x-4"
-                style={{ transformOrigin: '150px -150px' }}
-              >
-                <motion.div
-                  variants={floatingVariants}
-                  animate="animate"
-                  style={{ animationDelay: '4s' }}
-                  className="bg-gradient-to-br from-red-500 to-red-700 backdrop-blur-sm text-white p-2.5 sm:p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-                >
-                  <Database size={16} className="sm:w-5 sm:h-5" />
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                className="absolute top-1/4 left-0 transform -translate-x-4"
-                style={{ transformOrigin: '150px 150px' }}
-              >
-                <motion.div
-                  variants={floatingVariants}
-                  animate="animate"
-                  style={{ animationDelay: '5s' }}
-                  className="bg-gradient-to-br from-teal-500 to-teal-700 backdrop-blur-sm text-white p-2.5 sm:p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
-                >
-                  <Globe size={16} className="sm:w-5 sm:h-5" />
-                </motion.div>
-              </motion.div>
-            </motion.div>
-
-            {/* Enhanced Code Badge */}
-            <motion.div
-              className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 bg-gradient-to-r from-green-600 via-green-700 to-green-800 text-white p-2.5 sm:p-3 rounded-full shadow-lg transform rotate-12 hover:rotate-0 transition-transform duration-300 border-2 border-green-400/30"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="font-mono text-xs sm:text-sm font-bold">&lt;/&gt;</span>
-            </motion.div>
-
-            {/* Enhanced decorative elements */}
-            <motion.div
-              className="absolute -top-4 sm:-top-6 -right-4 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 bg-gradient-to-r from-green-500/30 to-blue-500/30 rounded-full blur-xl"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.6, 0.3]
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-            <motion.div
-              className="absolute -bottom-4 sm:-bottom-8 -left-4 sm:-left-8 w-20 h-20 sm:w-32 sm:h-32 bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-full blur-xl"
-              animate={{
-                scale: [1.2, 1, 1.2],
-                opacity: [0.6, 0.3, 0.6]
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-
-            {/* Additional glow effects */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[370px] sm:w-[350px] sm:h-[450px] lg:w-[450px] lg:h-[650px] bg-green-500/10 rounded-[2rem] sm:rounded-[3rem] lg:rounded-[4rem] blur-3xl -z-20"></div>
           </div>
         </motion.div>
       </div>
-     
-      {/* Scroll down indicator */}
-     
     </div>
   );
 };
