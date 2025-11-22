@@ -56,7 +56,7 @@ const Hero = () => {
       </div>
 
       {/* === MAIN CONTENT === */}
-      <div className="container mx-auto grid lg:grid-cols-2 gap-10 lg:gap-8 items-center pt-20 px-6 relative z-10">
+      <div className="container mx-auto grid lg:grid-cols-2 gap-10 lg:gap-8 items-center pt-20 px-8 relative z-10">
         
         {/* LEFT SIDE: TEXT CONTENT */}
         <motion.div
@@ -65,12 +65,19 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="flex flex-col space-y-6 order-2 lg:order-1 lg:pl-12 text-center lg:text-left"
         >
-           <motion.span 
-             className="text-lg font-medium text-green-400 tracking-wide uppercase"
-             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
-           >
-            Assalamulaikum
-          </motion.span>
+             {/* Greeting Pill - FIXED: Compact & Balanced */}
+               <motion.div 
+                 className="w-fit mx-auto lg:mx-0 flex items-center gap-2 px-4 py-1.5 rounded-full border border-green-500/30 bg-green-900/10 backdrop-blur-md"
+                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
+               >
+                 <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                 </span>
+                 <span className="text-sm font-medium text-green-400 tracking-wide uppercase leading-none pt-[1px]">
+                   Assalamulaikum
+                 </span>
+              </motion.div>
           
           {/* 
              TEXT SIZE FIX:
@@ -133,7 +140,7 @@ const Hero = () => {
           {/* Social Icons */}
             {/* Social Icons with Hover Glow */}
           <motion.div 
-            className="flex items-center justify-center lg:justify-start space-x-6 pt-6"
+            className="flex items-center justify-center lg:justify-start space-x-6 pt-3"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}
           >
             {[
