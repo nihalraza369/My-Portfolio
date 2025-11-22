@@ -78,12 +78,7 @@ const Hero = () => {
                    Assalamulaikum
                  </span>
               </motion.div>
-          
-          {/* 
-             TEXT SIZE FIX:
-             - text-3xl (Mobile) -> text-5xl (Desktop)
-             - height (h-[...]) fix kiya taake text kate nahi
-          */}
+          {/* Main Heading with Sliding Text Effect */}
          <motion.h1 className="text-2xl sm:text-3xl font-bold text-white flex flex-col sm:flex-row sm:items-center gap-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
             <span>Hello 👋 I'm</span>
             <span className="animation-container text-white">
