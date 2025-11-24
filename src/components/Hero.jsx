@@ -135,7 +135,7 @@ const Hero = () => {
           {/* Social Icons */}
             {/* Social Icons with Hover Glow */}
           <motion.div 
-            className="flex items-center justify-center lg:justify-start space-x-6 pt-3"
+            className="flex items-center justify-center lg:justify-start space-x-6 pt-1"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}
           >
             {[
