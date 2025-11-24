@@ -97,6 +97,26 @@ const Projects = () => {
       liveLink: 'https://github.com/nihalraza369/Js-Game-project',
       githubLink: 'https://github.com/nihalraza369/Js-Game-project',
     },
+    {
+      id: 10,
+      title: 'Pathen.ai',
+      description: 'this is a comapny website where as frontend developer',
+      image: '/pathen image.PNG',
+      category: 'web',
+      technologies: ['JavaScript','React', 'Next.js'],
+      liveLink: 'https://github.com/nihalraza369/Js-Game-project',
+      githubLink: 'https://github.com/pathenofficial',
+    },
+    {
+      id: 11,
+      title: 'Nexdice',
+      description: 'this is a comapny website where as full stack developer',
+      image: '/nexdice image.PNG',
+      category: 'web',
+      technologies: ['JavaScript','React', 'Next.js', 'Node.js', 'MongoDB'],
+      liveLink: 'https://www.nexdice.com/',
+      githubLink: 'https://github.com/Nexdice',
+    },
   ];
 
   const filters = [
