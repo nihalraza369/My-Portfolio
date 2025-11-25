@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, ArrowRight, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowRight, Github, Linkedin, Twitter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
+import emailjs from '@emailjs/browser'; // Import EmailJS
 
 const Contact = () => {
   const { toast } = useToast();
+  const formRef = useRef(); // Form Reference
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   const [formData, setFormData] = useState({
@@ -23,23 +25,39 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    setTimeout(() => {
-      toast({
-        title: "Message Sent!",
-        description: "Thank you for reaching out. I'll get back to you soon.",
-        duration: 5000,
+
+    // === YAHAN APNI DETAILS DAALNA ===
+    const SERVICE_ID = "service_9zt2f5m";   // EmailJS se milega
+    const TEMPLATE_ID = "template_9n777yc"; // EmailJS se milega
+    const PUBLIC_KEY = "hToTla7ssFpPRfOHG";   // EmailJS Account settings se milega
+    // =================================
+
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
+      .then((result) => {
+          console.log(result.text);
+          toast({
+            title: "Message Sent Successfully!",
+            description: "Thanks! I'll get back to you soon.",
+            className: "bg-green-600 text-white border-none"
+          });
+          setFormData({ name: '', email: '', subject: '', message: '' });
+      }, (error) => {
+          console.log(error.text);
+          toast({
+            title: "Failed to Send",
+            description: "Something went wrong. Please try again.",
+            variant: "destructive",
+          });
+      })
+      .finally(() => {
+        setIsSubmitting(false);
       });
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setIsSubmitting(false);
-    }, 1500);
   };
 
   return (
     <section className="py-20 bg-gray-50 min-h-screen flex items-center justify-center" id="contact">
       <div className="container mx-auto px-4 md:px-6">
         
-        {/* === MAIN GREEN CARD === */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,38 +65,36 @@ const Contact = () => {
           transition={{ duration: 0.6 }}
           className="bg-gradient-to-br from-green-600 to-green-700 rounded-[2.5rem] shadow-2xl overflow-hidden relative"
         >
-          
-          {/* Background Patterns (Decoration) */}
+          {/* Background Patterns */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
           
           <div className="p-8 md:p-16 lg:p-20 relative z-10">
             
-            {/* === SECTION HEADER (Inside Green Box) === */}
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
                 Get In Touch
               </h2>
               <p className="text-green-100 max-w-2xl mx-auto text-lg">
-                Have a project in mind or want to collaborate? Feel free to reach out and let's create something amazing together.
+                Have a project in mind? Fill out the form and I'll get back to you!
               </p>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
               
-              {/* === LEFT SIDE: INFO === */}
+              {/* LEFT SIDE: INFO */}
               <div className="space-y-10 text-white">
                 <div>
                   <h3 className="text-2xl font-bold mb-4">Contact Information</h3>
                   <p className="text-green-100 leading-relaxed">
-                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                    I'm always open to discussing new projects, creative ideas, or opportunities.
                   </p>
                 </div>
 
                 <div className="space-y-6">
                   {[
                     { icon: Mail, title: 'Email Me', value: 'nihalraza369@gmail.com', link: 'mailto:nihalraza369@gmail.com' },
-                    { icon: Phone, title: 'Call Me', value: '+92 300 1234567', link: 'tel:+923001234567' },
+                    { icon: Phone, title: 'Call Me', value: '+92 319 8435972', link: 'tel:+923198435972' },
                     { icon: MapPin, title: 'Location', value: 'Karachi, Pakistan', link: '#' }
                   ].map((item, index) => (
                     <a 
@@ -97,7 +113,6 @@ const Contact = () => {
                   ))}
                 </div>
 
-                {/* Social Icons */}
                 <div className="pt-6">
                   <p className="text-sm font-medium text-green-200 mb-4 uppercase tracking-wider">Follow Socials</p>
                   <div className="flex gap-4">
@@ -110,17 +125,18 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* === RIGHT SIDE: FORM (White Card on Green) === */}
+              {/* RIGHT SIDE: FORM */}
               <div className="bg-white rounded-3xl p-8 shadow-xl">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Send a Message</h3>
                 
-                <form onSubmit={handleSubmit} className="space-y-5">
+                {/* ref={formRef} lagana zaroori hai EmailJS ke liye */}
+                <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid md:grid-cols-2 gap-5">
                     <div className="space-y-2">
                       <label className="text-sm font-semibold text-gray-700">Name</label>
                       <input
                         type="text"
-                        name="name"
+                        name="name" // Ye name EmailJS template me {{name}} se match hona chahiye
                         value={formData.name}
                         onChange={handleChange}
                         required
@@ -132,7 +148,7 @@ const Contact = () => {
                       <label className="text-sm font-semibold text-gray-700">Email</label>
                       <input
                         type="email"
-                        name="email"
+                        name="email" // Ye name EmailJS template me {{email}} se match hona chahiye
                         value={formData.email}
                         onChange={handleChange}
                         required
@@ -158,7 +174,7 @@ const Contact = () => {
                   <div className="space-y-2">
                     <label className="text-sm font-semibold text-gray-700">Message</label>
                     <textarea
-                      name="message"
+                      name="message" // Ye name EmailJS template me {{message}} se match hona chahiye
                       value={formData.message}
                       onChange={handleChange}
                       required
