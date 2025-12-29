@@ -112,12 +112,42 @@ const Skills = () => {
     <div 
       className="relative min-h-screen bg-black text-white py-20 overflow-hidden" 
       id="skills"
-      // === 2. MOUSE EVENT HANDLERS ===
+      // === 2. POINTER & TOUCH EVENT HANDLERS ===
       onMouseMove={(e) => {
         mouseX.set(e.clientX);
         mouseY.set(e.clientY);
       }}
       onMouseLeave={() => {
+        mouseX.set(Infinity);
+        mouseY.set(Infinity);
+      }}
+      onPointerMove={(e) => {
+        mouseX.set(e.clientX);
+        mouseY.set(e.clientY);
+      }}
+      onPointerLeave={() => {
+        mouseX.set(Infinity);
+        mouseY.set(Infinity);
+      }}
+      onTouchStart={(e) => {
+        const t = e.touches && e.touches[0];
+        if (t) {
+          mouseX.set(t.clientX);
+          mouseY.set(t.clientY);
+        }
+      }}
+      onTouchMove={(e) => {
+        const t = e.touches && e.touches[0];
+        if (t) {
+          mouseX.set(t.clientX);
+          mouseY.set(t.clientY);
+        }
+      }}
+      onTouchEnd={() => {
+        mouseX.set(Infinity);
+        mouseY.set(Infinity);
+      }}
+      onTouchCancel={() => {
         mouseX.set(Infinity);
         mouseY.set(Infinity);
       }}

@@ -39,6 +39,36 @@ const Hero = () => {
         mouseX.set(Infinity);
         mouseY.set(Infinity);
       }}
+      onPointerMove={(e) => {
+        mouseX.set(e.clientX);
+        mouseY.set(e.clientY);
+      }}
+      onPointerLeave={() => {
+        mouseX.set(Infinity);
+        mouseY.set(Infinity);
+      }}
+      onTouchStart={(e) => {
+        const t = e.touches && e.touches[0];
+        if (t) {
+          mouseX.set(t.clientX);
+          mouseY.set(t.clientY);
+        }
+      }}
+      onTouchMove={(e) => {
+        const t = e.touches && e.touches[0];
+        if (t) {
+          mouseX.set(t.clientX);
+          mouseY.set(t.clientY);
+        }
+      }}
+      onTouchEnd={() => {
+        mouseX.set(Infinity);
+        mouseY.set(Infinity);
+      }}
+      onTouchCancel={() => {
+        mouseX.set(Infinity);
+        mouseY.set(Infinity);
+      }}
     >
       {/* === BACKGROUND === */}
       <div className="absolute inset-0 -z-20 pointer-events-none">
@@ -135,19 +165,22 @@ const Hero = () => {
           {/* Social Icons */}
             {/* Social Icons with Hover Glow */}
           <motion.div 
-            className="flex items-center justify-center lg:justify-start space-x-6 pt-1"
+                 className="flex items-center justify-center lg:justify-start space-x-6 pt-1 pb-8 lg:pb-0"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}
           >
             {[
-              { Icon: Github, color: "hover:text-white" },
-              { Icon: Linkedin, color: "hover:text-blue-500" },
-              { Icon: Twitter, color: "hover:text-sky-400" },
-              { Icon: Instagram, color: "hover:text-pink-500" },
-              { Icon: Facebook, color: "hover:text-blue-600" }
-            ].map(({ Icon, color }, index) => (
+              { Icon: Github, color: "hover:text-white", href: "https://github.com/nihalraza369/", label: "GitHub" },
+              { Icon: Linkedin, color: "hover:text-blue-500", href: "https://pk.linkedin.com/in/nehal-nughman-0a3496375", label: "LinkedIn" },
+              { Icon: Twitter, color: "hover:text-sky-400", href: "#", label: "Twitter" },
+              { Icon: Instagram, color: "hover:text-pink-500", href: "https://www.instagram.com/dev_nihal_raza/", label: "Instagram" },
+              { Icon: Facebook, color: "hover:text-blue-600", href: "https://www.facebook.com/profile.php?id=61553495939260", label: "Facebook" }
+            ].map(({ Icon, color, href, label }, index) => (
               <a 
                 key={index} 
-                href="#" 
+                href={href} 
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
                 className={`text-white/60 transition-all duration-300 transform hover:scale-125 hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] ${color}`}
               >
                 <Icon size={28} />

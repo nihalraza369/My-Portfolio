@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, ArrowRight, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowRight, Github, Linkedin, Twitter, Instagram, Facebook } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import emailjs from '@emailjs/browser'; // Import EmailJS
@@ -116,8 +116,14 @@ const Contact = () => {
                 <div className="pt-6">
                   <p className="text-sm font-medium text-green-200 mb-4 uppercase tracking-wider">Follow Socials</p>
                   <div className="flex gap-4">
-                    {[Github, Linkedin, Twitter].map((Icon, i) => (
-                      <a key={i} href="#" className="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white text-white hover:text-green-700 transition-all duration-300">
+                    {[
+                      { Icon: Github, href: 'https://github.com/nihalraza369/', label: 'GitHub' },
+                      { Icon: Linkedin, href: 'https://pk.linkedin.com/in/nehal-nughman-0a3496375', label: 'LinkedIn' },
+                      { Icon: Twitter, href: '#', label: 'Twitter' },
+                      { Icon: Instagram, href: 'https://www.instagram.com/dev_nihal_raza/', label: 'Instagram' },
+                      { Icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61553495939260', label: 'Facebook' }
+                    ].map(({ Icon, href, label }, i) => (
+                      <a key={i} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="h-10 w-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white text-white hover:text-green-700 transition-all duration-300">
                         <Icon size={20} />
                       </a>
                     ))}

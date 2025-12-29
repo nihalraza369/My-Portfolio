@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUp, Mail, MapPin, Phone, Github, Linkedin, Twitter, Instagram } from 'lucide-react';
+import { ArrowUp, Mail, MapPin, Phone, Github, Linkedin, Twitter, Instagram, Facebook } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Footer = () => {
@@ -84,8 +84,14 @@ const Footer = () => {
               A passionate Full Stack Developer & AI Engineer crafting engaging digital experiences with a focus on clean design.
             </p>
             <div className="flex gap-4 pt-2">
-              {[Github, Linkedin, Twitter, Instagram].map((Icon, i) => (
-                <a key={i} href="#" className="text-gray-400 hover:text-green-400 transition-colors hover:scale-110 transform duration-200">
+              {[
+                { Icon: Github, href: 'https://github.com/nihalraza369/', label: 'GitHub' },
+                { Icon: Linkedin, href: 'https://pk.linkedin.com/in/nehal-nughman-0a3496375', label: 'LinkedIn' },
+                { Icon: Twitter, href: '#', label: 'Twitter' },
+                { Icon: Instagram, href: 'https://www.instagram.com/dev_nihal_raza/', label: 'Instagram' },
+                { Icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61553495939260', label: 'Facebook' }
+              ].map(({ Icon, href, label }, i) => (
+                <a key={i} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="text-gray-400 hover:text-green-400 transition-colors hover:scale-110 transform duration-200">
                   <Icon size={20} />
                 </a>
               ))}
@@ -122,11 +128,11 @@ const Footer = () => {
             <div className="space-y-3 text-sm text-gray-400">
               <div className="flex items-center gap-3 hover:text-white transition-colors">
                 <Mail size={16} className="text-green-500" />
-                <span>contact@nihal.dev</span>
+                <span>nihalraza369@gmail.com</span>
               </div>
               <div className="flex items-center gap-3 hover:text-white transition-colors">
                 <Phone size={16} className="text-green-500" />
-                <span>+92 300 1234567</span>
+                <span>+92 319 8435972</span>
               </div>
               <div className="flex items-center gap-3 hover:text-white transition-colors">
                 <MapPin size={16} className="text-green-500" />
