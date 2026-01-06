@@ -170,10 +170,10 @@ const Hero = () => {
           >
             {[
               { Icon: Github, color: "hover:text-white", href: "https://github.com/nihalraza369/", label: "GitHub" },
-              { Icon: Linkedin, color: "hover:text-blue-500", href: "https://pk.linkedin.com/in/nehal-nughman-0a3496375", label: "LinkedIn" },
+              { Icon: Linkedin, color: "hover:text-blue-500", href: "#", label: "LinkedIn" },
               { Icon: Twitter, color: "hover:text-sky-400", href: "#", label: "Twitter" },
-              { Icon: Instagram, color: "hover:text-pink-500", href: "https://www.instagram.com/dev_nihal_raza/", label: "Instagram" },
-              { Icon: Facebook, color: "hover:text-blue-600", href: "https://www.facebook.com/profile.php?id=61553495939260", label: "Facebook" }
+              { Icon: Instagram, color: "hover:text-pink-500", href: "#", label: "Instagram" },
+              { Icon: Facebook, color: "hover:text-blue-600", href: "#", label: "Facebook" }
             ].map(({ Icon, color, href, label }, index) => (
               <a 
                 key={index} 
