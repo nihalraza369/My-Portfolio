@@ -86,10 +86,10 @@ const Footer = () => {
             <div className="flex gap-4 pt-2">
               {[
                 { Icon: Github, href: 'https://github.com/nihalraza369/', label: 'GitHub' },
-                { Icon: Linkedin, href: 'https://pk.linkedin.com/in/nehal-nughman-0a3496375', label: 'LinkedIn' },
+                { Icon: Linkedin, href: '#', label: 'LinkedIn' },
                 { Icon: Twitter, href: '#', label: 'Twitter' },
-                { Icon: Instagram, href: 'https://www.instagram.com/dev_nihal_raza/', label: 'Instagram' },
-                { Icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61553495939260', label: 'Facebook' }
+                { Icon: Instagram, href: '#', label: 'Instagram' },
+                { Icon: Facebook, href: '#', label: 'Facebook' }
               ].map(({ Icon, href, label }, i) => (
                 <a key={i} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="text-gray-400 hover:text-green-400 transition-colors hover:scale-110 transform duration-200">
                   <Icon size={20} />
