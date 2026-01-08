@@ -23,7 +23,7 @@ const Navbar = ({ activeSection, scrollY }) => {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-fit max-w-[95%]">
+    <header className="fixed top-2 left-1/2 -translate-x-1/2 z-50 w-fit max-w-[95%]">
       
       {/* 
         MAIN CONTAINER WITH "MERGE" EFFECT 
