@@ -125,8 +125,19 @@
 .animation-container {
   height: 2.5rem;
   overflow: hidden;
-  margin-left: 1rem;
-  display: inline-block;
+  margin-left: 0;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .animation-container {
+    margin-left: 1rem;
+    display: inline-block;
+    width: auto;
+    text-align: left;
+  }
 }
 
 .animation-slide > div > div {
@@ -150,18 +161,18 @@
 
 .animation-slide {
   animation: text-animation 8s infinite;
-  
+  will-change: transform;
 }
 
 @keyframes text-animation {
-  0% { margin-top: 0; }
-  10% { margin-top: 0; }
-  20% { margin-top: -5.62rem; }
-  30% { margin-top: -5.62rem; }
-  40% { margin-top: -11.24rem; }
-  60% { margin-top: -11.24rem; }
-  70% { margin-top: -5.62rem; }
-  80% { margin-top: -5.62rem; }
-  90% { margin-top: 0; }
-  100% { margin-top: 0; }
+  0% { transform: translateY(0); }
+  10% { transform: translateY(0); }
+  20% { transform: translateY(-5.5rem); }
+  30% { transform: translateY(-5.5rem); }
+  40% { transform: translateY(-11rem); }
+  60% { transform: translateY(-11rem); }
+  70% { transform: translateY(-5.5rem); }
+  80% { transform: translateY(-5.5rem); }
+  90% { transform: translateY(0); }
+  100% { transform: translateY(0); }
 }
