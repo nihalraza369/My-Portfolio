@@ -109,13 +109,13 @@ const Hero = () => {
                  </span>
               </motion.div>
           {/* Main Heading with Sliding Text Effect */}
-         <motion.h1 className="text-2xl sm:text-3xl font-bold text-white flex flex-col sm:flex-row sm:items-center gap-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
-            <span>Hello 👋 I'm</span>
-            <span className="animation-container text-white">
+         <motion.h1 className="text-2xl sm:text-3xl font-bold text-white flex flex-col items-center justify-center sm:flex-row sm:items-center lg:justify-start gap-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
+            <span className="whitespace-nowrap">Hello 👋 I'm</span>
+            <span className="animation-container text-white min-w-0 overflow-hidden w-full flex justify-center sm:w-auto sm:flex-none sm:justify-center">
               <div className="animation-slide">
-                <div className="first"><div>Nihal Raza</div></div>
-                <div className="second"><div>Full Stack Developer</div></div>
-                <div className="third"><div>AI Engineer</div></div>
+                <div className="first"><div className="whitespace-nowrap">Nehal Nughman</div></div>
+                <div className="second"><div className="whitespace-nowrap">Full Stack Developer</div></div>
+                <div className="third"><div className="whitespace-nowrap">AI Engineer</div></div>
               </div>
             </span>
           </motion.h1>
