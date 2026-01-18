@@ -68,8 +68,8 @@ const Footer = () => {
           <motion.div variants={itemVariants} className="flex flex-col md:items-end">
             <h3 className="text-xl md:text-2xl font-semibold text-white mb-2">Ready to start a project?</h3>
             <p className="text-gray-400 text-sm mb-4 md:text-right max-w-xs">Let's turn your ideas into reality with cutting-edge technology.</p>
-            <Button className="bg-white text-black hover:bg-green-50 rounded-full px-6 font-semibold shadow-lg hover:shadow-white/20 transition-all">
-              Let's Talk
+            <Button asChild className="bg-white text-black hover:bg-green-50 rounded-full px-6 font-semibold shadow-lg hover:shadow-white/20 transition-all">
+              <a href="#contact">Let's Talk</a>
             </Button>
           </motion.div>
         </motion.div>
@@ -86,10 +86,10 @@ const Footer = () => {
             <div className="flex gap-4 pt-2">
               {[
                 { Icon: Github, href: 'https://github.com/nihalraza369/', label: 'GitHub' },
-                { Icon: Linkedin, href: '#', label: 'LinkedIn' },
-                { Icon: Twitter, href: '#', label: 'Twitter' },
-                { Icon: Instagram, href: '#', label: 'Instagram' },
-                { Icon: Facebook, href: '#', label: 'Facebook' }
+                { Icon: Linkedin, href: 'https://www.linkedin.com/in/nehal-nughman-0a3496375/', label: 'LinkedIn' },
+                { Icon: Twitter, href: 'https://twitter.com/nihalraza369', label: 'Twitter' },
+                { Icon: Instagram, href: 'https://instagram.com/dev_nehal_raza', label: 'Instagram' },
+                { Icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61553495939260', label: 'Facebook' }
               ].map(({ Icon, href, label }, i) => (
                 <a key={i} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="text-gray-400 hover:text-green-400 transition-colors hover:scale-110 transform duration-200">
                   <Icon size={20} />
@@ -126,18 +126,18 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-white font-bold text-lg">Contact</h4>
             <div className="space-y-3 text-sm text-gray-400">
-              <div className="flex items-center gap-3 hover:text-white transition-colors">
+              <a href="mailto:nihalraza369@gmail.com" className="flex items-center gap-3 hover:text-white transition-colors">
                 <Mail size={16} className="text-green-500" />
                 <span>nihalraza369@gmail.com</span>
-              </div>
-              <div className="flex items-center gap-3 hover:text-white transition-colors">
+              </a>
+              <a href="tel:+923198435972" className="flex items-center gap-3 hover:text-white transition-colors">
                 <Phone size={16} className="text-green-500" />
                 <span>+92 319 8435972</span>
-              </div>
-              <div className="flex items-center gap-3 hover:text-white transition-colors">
+              </a>
+              <a href="https://www.google.com/maps/search/?api=1&query=Karachi+Pakistan" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
                 <MapPin size={16} className="text-green-500" />
                 <span>Karachi, Pakistan</span>
-              </div>
+              </a>
             </div>
           </div>
         </div>
