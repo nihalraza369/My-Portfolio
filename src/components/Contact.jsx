@@ -24,6 +24,32 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Basic client-side validation for better UX on mobile
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (formData.name.trim().length < 2) {
+      toast({
+        title: "Name is too short",
+        description: "Please enter your full name.",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (!emailPattern.test(formData.email)) {
+      toast({
+        title: "Invalid email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (formData.message.trim().length < 10) {
+      toast({
+        title: "Message too short",
+        description: "Please add more details to your message.",
+        variant: "destructive",
+      });
+      return;
+    }
     setIsSubmitting(true);
 
     // === YAHAN APNI DETAILS DAALNA ===
@@ -55,21 +81,21 @@ const Contact = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-50 min-h-screen flex items-center justify-center" id="contact">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="py-16 lg:py-1" id="contact">
+      <div className="container mx-auto px-4 sm:px-6">
         
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="bg-gradient-to-br from-green-600 to-green-700 rounded-[2.5rem] shadow-2xl overflow-hidden relative"
+          className="rounded-[2.5rem] shadow-2xl overflow-hidden relative border border-green-500/20 bg-gradient-to-br from-green-700 to-emerald-700"
         >
           {/* Background Patterns */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
           
-          <div className="p-8 md:p-16 lg:p-20 relative z-10">
+          <div className="p-6 sm:p-10 lg:p-16 relative z-10">
             
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
@@ -80,7 +106,7 @@ const Contact = () => {
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
               
               {/* LEFT SIDE: INFO */}
               <div className="space-y-10 text-white">
@@ -115,10 +141,10 @@ const Contact = () => {
 
                 <div className="pt-6">
                   <p className="text-sm font-medium text-green-200 mb-4 uppercase tracking-wider">Follow Socials</p>
-                  <div className="flex gap-4">
+                  <div className="flex gap-4 flex-wrap">
                     {[
                       { Icon: Github, href: 'https://github.com/nihalraza369/', label: 'GitHub' },
-                      { Icon: Linkedin, href: 'hhttps://www.linkedin.com/in/nehal-nughman-0a3496375/', label: 'LinkedIn' },
+                      { Icon: Linkedin, href: 'https://www.linkedin.com/in/nehal-nughman-0a3496375/', label: 'LinkedIn' },
                       { Icon: Twitter, href: 'https://twitter.com/nihalraza369', label: 'Twitter' },
                       { Icon: Instagram, href: 'https://instagram.com/dev_nehal_raza', label: 'Instagram' },
                       { Icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61553495939260', label: 'Facebook' }
@@ -132,60 +158,68 @@ const Contact = () => {
               </div>
 
               {/* RIGHT SIDE: FORM */}
-              <div className="bg-white rounded-3xl p-8 shadow-xl">
+              <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl max-w-xl w-full mx-auto">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Send a Message</h3>
                 
                 {/* ref={formRef} lagana zaroori hai EmailJS ke liye */}
                 <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid md:grid-cols-2 gap-5">
                     <div className="space-y-2">
-                      <label className="text-sm font-semibold text-gray-700">Name</label>
+                      <label className="text-sm font-semibold text-gray-700" htmlFor="name">Name</label>
                       <input
                         type="text"
+                        id="name"
                         name="name" // Ye name EmailJS template me {{name}} se match hona chahiye
                         value={formData.name}
                         onChange={handleChange}
                         required
                         placeholder="Nihal Raza"
+                        autoComplete="name"
                         className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-semibold text-gray-700">Email</label>
+                      <label className="text-sm font-semibold text-gray-700" htmlFor="email">Email</label>
                       <input
                         type="email"
+                        id="email"
                         name="email" // Ye name EmailJS template me {{email}} se match hona chahiye
                         value={formData.email}
                         onChange={handleChange}
                         required
                         placeholder="hello@example.com"
+                        autoComplete="email"
                         className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-gray-700">Subject</label>
+                    <label className="text-sm font-semibold text-gray-700" htmlFor="subject">Subject</label>
                     <input
                       type="text"
+                      id="subject"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
                       required
                       placeholder="Project Inquiry"
+                        autoComplete="off"
                       className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-gray-700">Message</label>
+                    <label className="text-sm font-semibold text-gray-700" htmlFor="message">Message</label>
                     <textarea
                       name="message" // Ye name EmailJS template me {{message}} se match hona chahiye
+                      id="message"
                       value={formData.message}
                       onChange={handleChange}
                       required
                       rows="4"
                       placeholder="Write your message here..."
+                      autoComplete="off"
                       className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-all resize-none"
                     ></textarea>
                   </div>
@@ -193,7 +227,7 @@ const Contact = () => {
                   <Button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-6 rounded-xl shadow-lg hover:shadow-green-900/20 transition-all duration-300 flex items-center justify-center gap-2 group"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-5 rounded-xl shadow-lg hover:shadow-green-900/20 transition-all duration-300 flex items-center justify-center gap-2 group"
                   >
                     {isSubmitting ? (
                       "Sending..."
