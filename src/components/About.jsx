@@ -70,7 +70,7 @@ const About = () => {
               <img 
                 alt="Nihal Working" 
                 className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700" 
-                src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=1000&auto=format&fit=crop" 
+                src="backgrouhdn.png" 
               />
               
               {/* Floating Experience Badge */}
