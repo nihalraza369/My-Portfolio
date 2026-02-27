@@ -187,7 +187,8 @@ export default defineConfig({
 	server: {
 		cors: true,
 		headers: {
-			'Cross-Origin-Embedder-Policy': 'credentialless',
+			// Commented out COEP to allow Calendly embed to work
+			// 'Cross-Origin-Embedder-Policy': 'credentialless',
 		},
 		allowedHosts: true,
 	},
