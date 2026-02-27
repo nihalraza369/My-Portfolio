@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { Code, Zap, Cpu, Palette, Database, Globe, Github, Linkedin, Twitter, Instagram, Facebook, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -95,19 +96,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="flex flex-col space-y-6 order-2 lg:order-1 lg:pl-12 text-center lg:text-left"
         >
-             {/* Greeting Pill - FIXED: Compact & Balanced */}
-               <motion.div 
-                 className="w-fit mx-auto lg:mx-0 flex items-center gap-2 px-4 py-1.5 rounded-full border border-green-500/30 bg-green-900/10 backdrop-blur-md"
-                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
-               >
-                 <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                 </span>
-                 <span className="text-sm font-medium text-green-400 tracking-wide uppercase leading-none pt-[1px]">
-                   Assalamulaikum
-                 </span>
-              </motion.div>
+             
           {/* Main Heading with Sliding Text Effect */}
          <motion.h1 className="text-2xl sm:text-3xl font-bold text-white flex flex-col items-center justify-center sm:flex-row sm:items-center lg:justify-start gap-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
             <span className="whitespace-nowrap">Hello 👋 I'm</span>
@@ -144,12 +133,12 @@ const Hero = () => {
               className="group relative overflow-hidden bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-6 rounded-xl shadow-lg shadow-green-900/20 hover:shadow-green-500/30 transition-all duration-300 border border-green-500/20"
               size="lg" asChild
             >
-              <a href="#contact" className="flex items-center gap-2 text-base font-semibold">
-                <span className="relative z-10">Get in Touch</span>
+              <Link to="/book-call" className="flex items-center gap-2 text-base font-semibold">
+                <span className="relative z-10">Schedule a Consultation</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
                 {/* Shine Effect Overlay */}
                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
-              </a>
+              </Link>
             </Button>
             
             {/* Secondary Button: Glassmorphism */}
@@ -163,27 +152,28 @@ const Hero = () => {
           </motion.div>
          
           {/* Social Icons */}
-            {/* Social Icons with Hover Glow */}
           <motion.div 
-                 className="flex items-center justify-center lg:justify-start space-x-6 pt-1 pb-8 lg:pb-0"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}
+            className="flex justify-center lg:justify-start gap-3 flex-wrap pt-1"
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            transition={{ delay: 0.7 }}
           >
             {[
-              { Icon: Github, color: "hover:text-white", href: "https://github.com/nihalraza369/", label: "GitHub" },
-              { Icon: Linkedin, color: "hover:text-blue-500", href: "https://www.linkedin.com/in/nehal-nughman-0a3496375/", label: "LinkedIn" },
-              { Icon: Twitter, color: "hover:text-sky-400", href: "https://twitter.com/nihalraza369", label: "Twitter" },
-              { Icon: Instagram, color: "hover:text-pink-500", href: "https://instagram.com/dev_nehal_raza", label: "Instagram" },
-              { Icon: Facebook, color: "hover:text-blue-600", href: "https://www.facebook.com/profile.php?id=61553495939260", label: "Facebook" }
-            ].map(({ Icon, color, href, label }, index) => (
+              { Icon: Github, href: 'https://github.com/nihalraza369/', label: 'GitHub', color: 'hover:bg-gray-900 hover:text-white' },
+              { Icon: Linkedin, href: 'https://www.linkedin.com/in/nehal-nughman-0a3496375/', label: 'LinkedIn', color: 'hover:bg-blue-600 hover:text-white' },
+              { Icon: Twitter, href: 'https://twitter.com/nihalraza369', label: 'Twitter', color: 'hover:bg-sky-500 hover:text-white' },
+              { Icon: Instagram, href: 'https://instagram.com/dev_nehal_raza', label: 'Instagram', color: 'hover:bg-pink-600 hover:text-white' },
+              { Icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61553495939260', label: 'Facebook', color: 'hover:bg-blue-700 hover:text-white' }
+            ].map(({ Icon, href, label, color }, i) => (
               <a 
-                key={index} 
+                key={i} 
                 href={href} 
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className={`text-white/60 transition-all duration-300 transform hover:scale-125 hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] ${color}`}
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label={label} 
+                className={`h-11 w-11 sm:h-12 sm:w-12 flex items-center justify-center rounded-xl bg-white/10 text-white border border-white/20 ${color} transition-all duration-300 hover:shadow-lg hover:-translate-y-1`}
               >
-                <Icon size={28} />
+                <Icon size={20} />
               </a>
             ))}
           </motion.div>
@@ -200,7 +190,7 @@ const Hero = () => {
             
             {/* Layer 1: Back Border */}
             <div 
-              className="absolute inset-0 rounded-[2.5rem] bg-black border-[3px] border-green-400 shadow-[0_0_40px_rgba(74,222,128,0.2)]"
+              className="absolute inset-0 rounded-[2.5rem] bg-black shadow-[0_0_40px_rgba(74,222,128,0.2)]"
               style={{ transform: "translateZ(-40px)" }}
             >
                 <div className="absolute inset-0 bg-green-500/5 rounded-[2.5rem]" />
@@ -258,11 +248,11 @@ const Hero = () => {
             >
                 <div className="absolute inset-0 bg-gradient-to-tr from-green-500/10 via-transparent to-green-500/10 z-10 pointer-events-none mix-blend-overlay" />
                 <img
-                  src="/my-image.png"
+                  src="/m.png"
                   alt="Profile"
                   className="w-full h-full object-cover object-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 z-20"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-100 hover:opacity-100 transition-opacity duration-300 z-20"></div>
             </div>
 
           </div>
