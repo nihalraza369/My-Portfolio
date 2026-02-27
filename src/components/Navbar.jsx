@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 const Navbar = ({ activeSection, scrollY }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     setIsScrolled(scrollY > 50);
   }, [scrollY]);
 
   const navLinks = [
-    { name: 'Home', href: '#home', id: 'home' },
-    { name: 'About', href: '#about', id: 'about' },
-    { name: 'Projects', href: '#projects', id: 'projects' },
-    { name: 'Skills', href: '#skills', id: 'skills' },
-    { name: 'Contact', href: '#contact', id: 'contact' },
+    { name: 'Home', href: '/', id: 'home', type: 'route' },
+    { name: 'Book Call', href: '/book-call', id: 'book-call', type: 'route' },
+    { name: 'About', href: '/#about', id: 'about', type: 'route' },
+    { name: 'Projects', href: '/#projects', id: 'projects', type: 'route' },
+    { name: 'Skills', href: '/#skills', id: 'skills', type: 'route' },
+    { name: 'Contact', href: '/#contact', id: 'contact', type: 'route' },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -43,10 +46,10 @@ const Navbar = ({ activeSection, scrollY }) => {
             transition={{ type: "spring", stiffness: 260, damping: 20 }}
           >
             {/* Logo Text */}
-            <a href="#home" className="flex flex-col items-center justify-center leading-none">
+            <Link to="/" className="flex flex-col items-center justify-center leading-none">
                <span className="text-xl font-black tracking-tighter">N</span>
                <span className="text-xl font-black tracking-tighter text-green-900">N</span>
-            </a>
+            </Link>
           </motion.div>
 
           {/* 2. THE MENU PILL (Right Side) - Isko Circle ke peeche thoda ghusaya hai (-ml-6) */}
@@ -71,31 +74,56 @@ const Navbar = ({ activeSection, scrollY }) => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
             >
-              {navLinks.map((link) => (
-                <a
-                  key={link.id}
-                  href={link.href}
-                  className={`
-                    relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-300
-                    ${activeSection === link.id ? 'text-green-900 font-bold' : 'text-gray-500 hover:text-green-700 hover:bg-green-50'}
-                  `}
-                >
-                  {link.name}
-                  {/* Active Dot Indicator */}
-                  {activeSection === link.id && (
-                    <motion.span
-                      layoutId="navDot"
-                      className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-green-900 rounded-full"
-                    />
-                  )}
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                // Check if link is active
+                let isActive = false;
+                if (link.href.includes('/#')) {
+                  // For home sections (/#about, /#projects, etc.)
+                  isActive = location.pathname === '/' && activeSection === link.id;
+                } else if (link.href === '/') {
+                  // For home link
+                  isActive = location.pathname === '/' && activeSection === 'home';
+                } else {
+                  // For other routes (like /book-call)
+                  isActive = location.pathname === link.href;
+                }
+                
+                const LinkComponent = link.type === 'route' ? Link : 'a';
+                const linkProps = link.type === 'route' 
+                  ? { to: link.href } 
+                  : { href: link.href };
+
+                return (
+                  <LinkComponent
+                    key={link.id}
+                    {...linkProps}
+                    className={`
+                      relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-300
+                      ${isActive ? 'text-green-900 font-bold' : 'text-gray-500 hover:text-green-700 hover:bg-green-50'}
+                    `}
+                  >
+                    {link.name}
+                    {/* Active Dot Indicator */}
+                    {isActive && (
+                      <motion.span
+                        layoutId="navDot"
+                        className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-green-900 rounded-full"
+                      />
+                    )}
+                  </LinkComponent>
+                );
+              })}
 
               {/* Divider */}
               <div className="w-px h-5 bg-gray-200 mx-2"></div>
 
-              <Button className="rounded-full bg-green-900 hover:bg-green-800 h-9 px-5 text-xs font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all">
-                CV
+              <Button 
+                className="rounded-full bg-green-900 hover:bg-green-800 h-9 px-5 text-xs font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all"
+                asChild
+              >
+                <a href="/nihal-nughman cv.pdf" download="Nehal_Nughman_CV.pdf">
+                  CV
+                </a>
               </Button>
             </motion.nav>
 
@@ -120,23 +148,51 @@ const Navbar = ({ activeSection, scrollY }) => {
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
           >
             <div className="flex flex-col space-y-1">
-              {navLinks.map((link, index) => (
-                <motion.a
-                  key={link.id}
-                  href={link.href}
-                  onClick={closeMenu}
-                  className={`
-                    block px-4 py-3 rounded-xl text-center font-medium text-sm
-                    ${activeSection === link.id ? 'bg-green-50 text-green-900' : 'text-gray-600 hover:bg-gray-50'}
-                  `}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                >
-                  {link.name}
-                </motion.a>
-              ))}
-              <Button className="w-full mt-2 rounded-xl bg-green-900 text-sm">Download CV</Button>
+              {navLinks.map((link, index) => {
+                // Check if link is active
+                let isActive = false;
+                if (link.href.includes('/#')) {
+                  // For home sections (/#about, /#projects, etc.)
+                  isActive = location.pathname === '/' && activeSection === link.id;
+                } else if (link.href === '/') {
+                  // For home link
+                  isActive = location.pathname === '/' && activeSection === 'home';
+                } else {
+                  // For other routes (like /book-call)
+                  isActive = location.pathname === link.href;
+                }
+                
+                const LinkComponent = link.type === 'route' ? Link : 'a';
+                const linkProps = link.type === 'route' 
+                  ? { to: link.href } 
+                  : { href: link.href };
+
+                return (
+                  <motion.div key={link.id}>
+                    <LinkComponent
+                      {...linkProps}
+                      onClick={closeMenu}
+                      className={`
+                        block px-4 py-3 rounded-xl text-center font-medium text-sm
+                        ${isActive ? 'bg-green-50 text-green-900' : 'text-gray-600 hover:bg-gray-50'}
+                      `}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                    >
+                      {link.name}
+                    </LinkComponent>
+                  </motion.div>
+                );
+              })}
+              <Button 
+                className="w-full mt-2 rounded-xl bg-green-900 text-sm hover:bg-green-800 transition-colors"
+                asChild
+              >
+                <a href="/CV.pdf" download="Nehal_Nughman_CV.pdf">
+                  Download CV
+                </a>
+              </Button>
             </div>
           </motion.div>
         )}
