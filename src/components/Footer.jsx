@@ -69,7 +69,7 @@ const Footer = () => {
             <h3 className="text-xl md:text-2xl font-semibold text-white mb-2">Ready to start a project?</h3>
             <p className="text-gray-400 text-sm mb-4 md:text-right max-w-xs">Let's turn your ideas into reality with cutting-edge technology.</p>
             <Button asChild className="bg-white text-black hover:bg-green-50 rounded-full px-6 font-semibold shadow-lg hover:shadow-white/20 transition-all">
-              <a href="#contact">Let's Talk</a>
+              <a href="/book-call">Let's Talk</a>
             </Button>
           </motion.div>
         </motion.div>
