@@ -95,7 +95,7 @@
 }
 
 .section {
-  @apply py-16 md:py-24;
+  @apply py-0;
 }
 
 .container-custom {
